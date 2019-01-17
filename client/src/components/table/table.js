@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './style.css';
 import Button from './button.jsx';
-import AddProduct from './addProduct.jsx'
-import FontAwesome from 'react-fontawesome';
+import AddProduct from './addProduct.jsx';
+import InfoProduct from './infoProduct.jsx';
+
 
 
 
@@ -12,12 +13,19 @@ class Table extends Component {
   constructor(props){
     super(props)
     this.state = {
-      data:{
+      data:[{
     name: 'React',
       company: 'facebook',
       country: 'Jordan ',
       objectID: 0,
       },
+      {
+        name: 'Reactnative',
+          company: 'facebook',
+          country: 'Jordan ',
+          objectID: 1,
+          }
+    ],
       Visibility:false
 
     }
@@ -64,15 +72,20 @@ update =(id)=>{
              <th>country</th>
              <th>operation</th>
             </tr>
-            <tr>
-             <td><span>d</span></td>
-             <td>{name}</td>
-             <td>{company}</td>
-             <td>{country}</td>
-             <td><span><Button onClick={() => this.del(objectID)} className="btn-del">del</Button></span><span><Button onClick={() => this.update(objectID)} className="btn-upd">update</Button></span></td>
-            </tr>
- 
-        </table>
+          
+{this.state.data.map(function(item, i){
+  return (
+    <tr>
+        <td><InfoProduct data={this.stat.data}/></td>
+        <td>{name}</td>
+        <td>{company}</td>
+        <td>{country}</td>
+        <td><span><Button onClick={() => this.del(objectID)} className="btn-del">del</Button></span><span><Button onClick={() => this.update(objectID)} className="btn-upd">update</Button></span></td>
+    </tr> 
+  )
+})
+}
+      </table>
       
         {this.state.Visibility && <AddProduct /> }
 
